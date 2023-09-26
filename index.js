@@ -5,6 +5,7 @@ import getUserName from './src/getUserName.js';
 import { homedir } from 'node:os';
 import getPathUp from './src/getPathUp.js';
 import showListTable from './src/showListTable.js';
+import goFolderPatch from './src/goFolderPatch.js';
 
 let name = getUserName();
 let dir = process.cwd();
@@ -39,7 +40,16 @@ rl.on('line', async (input) => {
             default:
             console.log('Invalid input');
         }
+        if (input != '.exit') {
         console.log(`\n You are currently in ${currentWorkDirectory} \n`);
+        }
+    } else if (inputArr.length === 2) {
+        switch (inputArr[0]) {
+            case 'cd':
+                currentWorkDirectory = goFolderPatch(currentWorkDirectory, inputArr[1]);
+                //////
+        }
+        console.log(`\n You are currently in ${currentWorkDirectory} \n`)
     }
   });
 
