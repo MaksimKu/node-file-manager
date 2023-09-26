@@ -7,10 +7,15 @@ import { homedir } from 'node:os';
 let name = getUserName();
 let dir = process.cwd();
 process.chdir(homedir());
-console.log(dir)
-console.log(process.cwd())
-// console.log(`Welcome to the File Manager, ${name}! \n`)
-// const rl = readline.createInterface({ input, output });
+let currentWorkDirectory = process.cwd();
+console.log(`Welcome to the File Manager, ${name}! \n`);
+console.log(`You are currently in ${currentWorkDirectory}`);
+
+
+const rl = readline.createInterface({ input, output });
+
+rl.on('close', ()=>console.log(`\n Thank you for using File Manager, ${name}, goodbye! \n`));
+
 // rl.on('line', (input) => {
 //     console.log(homedir())
 //     console.log(dir);
