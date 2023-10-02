@@ -50,6 +50,7 @@ rl.on('line', async (input) => {
                 //////
         }
         console.log(`\n You are currently in ${currentWorkDirectory} \n`)
+        console.log('hi')
     }
   });
 
