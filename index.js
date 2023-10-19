@@ -48,12 +48,20 @@ rl.on('line', async (input) => {
         switch (inputArr[0]) {
             case 'cd':
                 currentWorkDirectory = goFolderPatch(currentWorkDirectory, inputArr[1]);
+            break;
             case 'cat': ;
             try {
                 await readAndPrintFile(inputArr[1]);
             } catch {
                 console.log('Operation failed');
             }
+            break;
+            case 'add':
+                try {
+                  await createEmptyFile(currentWorkDirectory, inputArr[1]);
+                } catch {
+                  console.log('Operation failed');
+                }
             break;
         }
         console.log(`\n You are currently in ${currentWorkDirectory} \n`)
