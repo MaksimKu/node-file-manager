@@ -6,6 +6,7 @@ import { homedir } from 'node:os';
 import getPathUp from './src/getPathUp.js';
 import showListTable from './src/showListTable.js';
 import goFolderPatch from './src/goFolderPatch.js';
+import readAndPrintFile from './src/readAndPrintFile.js';
 
 let name = getUserName();
 let dir = process.cwd();
@@ -22,7 +23,7 @@ rl.on('close', ()=>console.log(`\n Thank you for using File Manager, ${name}, go
 rl.on('line', async (input) => {
     let inputArr = input.trim().split(' ');
     inputArr.filter(item => item != '');
-    console.log(inputArr)
+    // console.log(inputArr)
     if (inputArr.length === 1) {
         switch (inputArr[0]) {
             case 'up':
@@ -47,10 +48,16 @@ rl.on('line', async (input) => {
         switch (inputArr[0]) {
             case 'cd':
                 currentWorkDirectory = goFolderPatch(currentWorkDirectory, inputArr[1]);
-                //////
+            case 'cat': ;
+            try {
+                await readAndPrintFile(inputArr[1]);
+            } catch {
+                console.log('Operation failed');
+            }
+            break;
         }
         console.log(`\n You are currently in ${currentWorkDirectory} \n`)
-        console.log('hi')
+        // console.log('hi')
     }
   });
 
