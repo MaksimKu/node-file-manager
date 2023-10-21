@@ -1,12 +1,15 @@
 import * as readline from 'node:readline/promises';
 import { constrainedMemory, cwd, stdin as input, stdout as output } from 'node:process';
+import { homedir, EOL, userInfo } from 'node:os';
 
 import getUserName from './src/getUserName.js';
-import { homedir } from 'node:os';
 import getPathUp from './src/getPathUp.js';
 import showListTable from './src/showListTable.js';
 import goFolderPatch from './src/goFolderPatch.js';
 import readAndPrintFile from './src/readAndPrintFile.js';
+import createEmptyFile from './src/createEmptyFile.js';
+import deleteFile from './src/deleteFile.js';
+import showCpus from './src/showCpus.js';
 
 let name = getUserName();
 let dir = process.cwd();
@@ -63,6 +66,23 @@ rl.on('line', async (input) => {
                   console.log('Operation failed');
                 }
             break;
+            case 'rm':
+                try {
+                    await deleteFile(inputArr[1]);
+                } catch {
+                    console.log("Operation failed")
+                }
+                break;
+            case'os':
+                switch (inputArr[1]) {
+                    case '--EOL':
+                        console.log('EOL:', EOL)
+                        break;
+                    case '--cpus':
+                        showCpus();
+                        break;
+                }
+
         }
         console.log(`\n You are currently in ${currentWorkDirectory} \n`)
         // console.log('hi')
