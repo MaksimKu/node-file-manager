@@ -81,6 +81,17 @@ rl.on('line', async (input) => {
                     case '--cpus':
                         showCpus();
                         break;
+                    case '--homedir':
+                        console.log(homedir());
+                        break;
+                    case '--username':
+                        console.log(userInfo().username);
+                        break;
+                    case '--architecture':
+                        console.log(process.arch);
+                        break;
+                    default:
+                        console.log('Invalid input');
                 }
 
         }
