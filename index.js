@@ -10,6 +10,8 @@ import readAndPrintFile from './src/readAndPrintFile.js';
 import createEmptyFile from './src/createEmptyFile.js';
 import deleteFile from './src/deleteFile.js';
 import showCpus from './src/showCpus.js';
+import calculateHash from './src/calculateHash.js';
+import renameFile from './src/RenameFile.js';
 
 let name = getUserName();
 let dir = process.cwd();
@@ -92,11 +94,37 @@ rl.on('line', async (input) => {
                         break;
                     default:
                         console.log('Invalid input');
-                }
-
+                };
+            case 'hash':
+                try {
+                    await calculateHash(inputArr[1]);
+                  } catch (err){
+                    console.log(err);
+                  }
+                break;
+            default:
+                console.log('Invalid input');
         }
         console.log(`\n You are currently in ${currentWorkDirectory} \n`)
-        // console.log('hi')
+    } else if (inputArr.length === 3) {
+        switch (inputArr[0]) {
+            case 'rn':
+                try {
+                    await renameFile(inputArr[1], inputArr[2])
+                } catch(err) {
+                    console.log(err)
+                }
+            break;
+            case 'cp':
+
+            break;
+            case 'mv':
+
+            break;
+            case 'compress':
+
+            break;
+        }
     }
   });
 
