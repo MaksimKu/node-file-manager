@@ -7,7 +7,6 @@ const renameFile = async (currentFilePath, newFileName) => {
     const isNewFilePath = await fsPromises.access(currentFilePath, fsPromises.constants.F_OK)
       .then(() => true)
       .catch(() => false);
-      console.log(isNewFilePath)
     if (isNewFilePath) {
         try{
       await fsPromises.rename(currentFilePath, newFilePath);

@@ -12,6 +12,7 @@ import deleteFile from './src/deleteFile.js';
 import showCpus from './src/showCpus.js';
 import calculateHash from './src/calculateHash.js';
 import renameFile from './src/RenameFile.js';
+import copyFile from './src/copyFile.js';
 
 let name = getUserName();
 let dir = process.cwd();
@@ -116,13 +117,33 @@ rl.on('line', async (input) => {
                 }
             break;
             case 'cp':
-
+                try {
+                    await copyFile(inputArr[1], inputArr[2])
+                } catch {
+                    console.log('Operation failed')
+                }
             break;
             case 'mv':
-
+                try {
+                    await copyFile(inputArr[1], inputArr[2]);
+                    await deleteFile(inputArr[1])
+                } catch {
+                    console.log('Operation failed')
+                }
             break;
             case 'compress':
-
+                try {
+                    await compress(inputArr[1], inputArr[2]);
+                  } catch {
+                    console.log('Operation failed');
+                  }
+            break;
+            case 'decompress':
+                try {
+                    await decompress(inputArr[1], inputArr[2]);
+                  } catch {
+                    console.log('Operation failed');
+                  }
             break;
         }
     }
